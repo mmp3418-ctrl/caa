@@ -14,7 +14,15 @@
             --whatsapp: #25D366;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
         body {
             font-family: 'Arial Black', 'Impact', sans-serif;
@@ -27,89 +35,88 @@
             justify-content: center;
             padding: 2rem;
         }
-/* الشعار */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
 
-.logo-img {
-    height: 45px;
-    width: auto;
-    display: block;
-}
+        a, button, div, img, input {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
 
-.logo-text {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #000;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
+        /* الشعار */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
 
-.logo-text span {
-    background: #000;
-    color: #fff;
-    padding: 0 5px;
-}
+        .logo-img {
+            height: 45px;
+            width: auto;
+            display: block;
+        }
 
-@media (max-width: 768px) {
-    .logo-img {
-        height: 35px;
-    }
-    .logo-text {
-        font-size: 1.2rem;
-    }
-}
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .logo-text span {
+            background: #000;
+            color: #fff;
+            padding: 0 5px;
+        }
+
         /* Preloader */
-.preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: preloaderOut 0.5s ease 1s forwards;
-}
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: preloaderOut 0.5s ease 1s forwards;
+        }
 
-@keyframes preloaderOut {
-    to {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
+        @keyframes preloaderOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
 
-.preloader-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-.preloader-logo-img {
-    width: 120px;
-    height: auto;
-    animation: float 2s ease-in-out infinite;
-}
+        .preloader-logo-img {
+            width: 120px;
+            height: auto;
+            animation: float 2s ease-in-out infinite;
+        }
 
-.preloader-logo-text {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #fff;
-    animation: float 2s ease-in-out infinite;
-    letter-spacing: -2px;
-}
+        .preloader-logo-text {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            animation: float 2s ease-in-out infinite;
+            letter-spacing: -2px;
+        }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
         .checkout-container {
             border: var(--border);
             padding: 2rem;
@@ -124,20 +131,6 @@
             margin-bottom: 2rem;
             padding-bottom: 1rem;
             border-bottom: var(--border);
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--black);
-            text-decoration: none;
-            letter-spacing: -2px;
-        }
-
-        .logo span {
-            background: var(--black);
-            color: var(--white);
-            padding: 0 0.5rem;
         }
 
         .checkout-title {
@@ -239,27 +232,31 @@
 
         @media (max-width: 768px) {
             body { padding: 1rem; }
-            .checkout-container { padding: 1rem; }
-            .checkout-container { box-shadow: 5px 5px 0 var(--black); }
+            .checkout-container { 
+                padding: 1rem; 
+                box-shadow: 5px 5px 0 var(--black);
+            }
+            .logo-img { height: 35px; }
+            .logo-text { font-size: 1.2rem; }
+            .preloader-logo-img { width: 80px; }
         }
     </style>
 </head>
 <body>
     <!-- Preloader -->
-<div class="preloader">
-    <div class="preloader-content">
-        <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-        <div class="preloader-logo-text" style="display: none;">CAPO</div>
-    </div>
-</div>
+    <div class="preloader">
+        <div class="preloader-content">
+            <img src="lo2.png" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <div class="preloader-logo-text" style="display: none;">CAPO</div>
+        </div>
     </div>
 
     <div class="checkout-container">
         <div class="checkout-header">
-           <a href="index.html" class="logo">
-    <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
-    <span class="logo-text">CAPO<span>BRAND</span></span>
-</a>
+            <a href="index.html" class="logo">
+                <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
+                <span class="logo-text">CAPO<span>BRAND</span></span>
+            </a>
             <h1 class="checkout-title">Checkout</h1>
         </div>
 
@@ -290,7 +287,8 @@
     </div>
 
     <script>
-        const WHATSAPP_NUMBER = "218910000000"; // ضع رقم الواتساب هنا
+        // ✅ رقم الواتساب الصحيح
+        const WHATSAPP_NUMBER = "218920469011";
 
         function displayOrderSummary() {
             const cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
