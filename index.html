@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPO BRAND | Home</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+            --border: 2px solid #000;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Preloader */
+       /* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: preloaderOut 0.5s ease 1s forwards;
+}
+
+@keyframes preloaderOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader-logo-img {
+    width: 120px;
+    height: auto;
+    animation: float 2s ease-in-out infinite;
+}
+
+.preloader-logo-text {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff;
+    animation: float 2s ease-in-out infinite;
+    letter-spacing: -2px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+        /* Header */
+        .header {
+            background: var(--white);
+            border-bottom: var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* ✅ الشعار الجديد - صورة + نص */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--black);
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
+            background: var(--black);
+            color: var(--white);
+            padding: 0 0.3rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: var(--black);
+            transition: var(--transition);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+        .cart-badge {
+            background: var(--black);
+            color: var(--white);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-right: 0.3rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: var(--border);
+            padding: 0.5rem 0.8rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--black);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            background: var(--white);
+            border-bottom: var(--border);
+            padding: 1rem;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 99;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            font-size: 1.1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: var(--border);
+            background: var(--white);
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            display: block;
+            -webkit-text-stroke: 2px var(--black);
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #333;
+        }
+
+        .hero-description {
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #555;
+            font-weight: normal;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--black);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border: var(--border);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: translate(-5px, -5px);
+            box-shadow: 5px 5px 0 var(--black);
+        }
+
+        .hero-image-container {
+            border: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            background: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-image-placeholder {
+            font-size: 15rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image-placeholder span {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-top: 1rem;
+            letter-spacing: 2px;
+        }
+
+        /* Brand Statement Section */
+        .brand-statement {
+            padding: 5rem 0;
+            border-bottom: var(--border);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .statement-text {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+
+        .statement-text span {
+            background: var(--black);
+            color: var(--white);
+            padding: 0 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer a:hover {
+            opacity: 0.7;
+        }
+
+        .footer p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-image-container {
+                min-height: 350px;
+            }
+            
+            .hero-image-placeholder {
+                font-size: 8rem;
+            }
+            
+            .btn-primary {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .logo-img {
+                height: 35px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   <!-- Preloader -->
+<div class="preloader">
+    <div class="preloader-content">
+        <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <div class="preloader-logo-text" style="display: none;">CAPO</div>
+    </div>
+</div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <!-- ✅ الشعار الجديد - صورة + نص -->
+            <a href="index.html" class="logo">
+                <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
+                <span class="logo-text">CAPO<span>BRAND</span></span>
+            </a>
+            
+            <nav class="nav">
+                <a href="index.html" class="active">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html">
+                    Cart
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html">Cart (<span id="mobileCartBadge">0</span>)</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div>
+                <h1 class="hero-title">
+                    CAPO
+                    <span>BRAND</span>
+                </h1>
+                <p class="hero-subtitle">Minimalist Brutalist Streetwear</p>
+                <p class="hero-description">
+                    تيشيرتات بتصميم جريء وهوية فريدة. نصنع قطعاً تعبر عنك بكل بساطة وقوة. 
+                    أسود وأبيض فقط، لا شيء غير ذلك.
+                </p>
+                <a href="shop.html" class="btn-primary">تسوق الآن ←</a>
+            </div>
+            <div class="hero-image-container">
+                <!-- ضع صورتك هنا -->
+                <img src="c1.jpeg" alt="CAPO BRAND" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="hero-image-placeholder" style="display: none;">
+                    👕
+                    <span>CAPO TEE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Statement -->
+    <section class="brand-statement">
+        <div class="container">
+            <p class="statement-text">
+                IDENTITY. <span>MOVEMENT.</span> CULTURE.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>© 2026 CAPO BRAND. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update Cart Badge
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartBadge').textContent = count;
+            document.getElementById('mobileCartBadge').textContent = count;
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+
+        // Initialize
+        updateCartBadge();
+    </script>
+</body>
+</html>

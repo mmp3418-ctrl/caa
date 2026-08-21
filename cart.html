@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPO BRAND | Cart</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+            --border: 2px solid #000;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+/* الشعار */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    display: block;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.logo-text span {
+    background: #000;
+    color: #fff;
+    padding: 0 5px;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        height: 35px;
+    }
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+       /* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: preloaderOut 0.5s ease 1s forwards;
+}
+
+@keyframes preloaderOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader-logo-img {
+    width: 120px;
+    height: auto;
+    animation: float 2s ease-in-out infinite;
+}
+
+.preloader-logo-text {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff;
+    animation: float 2s ease-in-out infinite;
+    letter-spacing: -2px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+        .header {
+            background: var(--white);
+            border-bottom: var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-decoration: none;
+            color: var(--black);
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            background: var(--black);
+            color: var(--white);
+            padding: 0 0.3rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: var(--black);
+            transition: var(--transition);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+        .cart-badge {
+            background: var(--black);
+            color: var(--white);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-right: 0.3rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--white);
+            border: var(--border);
+            padding: 0.5rem 0.8rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--black);
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: var(--white);
+            border-bottom: var(--border);
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+            border-bottom: var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .cart-item {
+            border: var(--border);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .cart-item:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .cart-item-price {
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: var(--border);
+            background: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+            font-family: inherit;
+        }
+
+        .qty-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .remove-btn {
+            background: var(--black);
+            color: var(--white);
+            border: var(--border);
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            font-family: inherit;
+            font-size: 0.8rem;
+        }
+
+        .remove-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .cart-total {
+            border: var(--border);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background: var(--gray);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            display: block;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: var(--transition);
+            font-size: 1rem;
+            border: var(--border);
+        }
+
+        .checkout-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .empty-cart p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .shop-now-btn {
+            display: inline-block;
+            background: var(--black);
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: var(--border);
+            transition: var(--transition);
+        }
+
+        .shop-now-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .cart-item-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+   <!-- Preloader -->
+<div class="preloader">
+    <div class="preloader-content">
+        <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <div class="preloader-logo-text" style="display: none;">CAPO</div>
+    </div>
+</div>
+
+    <header class="header">
+        <div class="header-inner">
+        <a href="index.html" class="logo">
+    <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
+    <span class="logo-text">CAPO<span>BRAND</span></span>
+</a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html" class="active">
+                    Cart
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html">Cart (<span id="mobileCartBadge">0</span>)</a>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Your Cart</h1>
+        <div id="cartContainer"></div>
+    </div>
+
+    <script>
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartBadge').textContent = count;
+            document.getElementById('mobileCartBadge').textContent = count;
+        }
+
+        function displayCart() {
+            const container = document.getElementById('cartContainer');
+            const cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <p style="font-size: 3rem;">🛒</p>
+                        <p>Your cart is empty</p>
+                        <a href="shop.html" class="shop-now-btn">Shop Now</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let total = 0;
+            
+            const itemsHTML = cart.map((item, index) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div style="opacity: 0.6; font-size: 0.9rem;">Size: ${item.size}</div>
+                            <div class="cart-item-price">${itemTotal} LYD</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn" onclick="updateQty(${index}, -1)">−</button>
+                            <span style="font-weight: bold; font-size: 1.1rem;">${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = `
+                ${itemsHTML}
+                <div class="cart-total">
+                    <div class="cart-total-row">
+                        <span>Total:</span>
+                        <span>${total} LYD</span>
+                    </div>
+                    <a href="checkout.html" class="checkout-btn">Proceed to Checkout →</a>
+                </div>
+            `;
+        }
+
+        function updateQty(index, delta) {
+            let cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
+            if (cart[index]) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) {
+                    cart.splice(index, 1);
+                }
+                localStorage.setItem('capo_cart', JSON.stringify(cart));
+                updateCartBadge();
+                displayCart();
+            }
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('capo_cart', JSON.stringify(cart));
+            updateCartBadge();
+            displayCart();
+        }
+
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+
+        updateCartBadge();
+        displayCart();
+    </script>
+</body>
+</html>
