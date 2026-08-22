@@ -13,13 +13,26 @@
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
         body {
             font-family: 'Arial Black', 'Impact', sans-serif;
             background: var(--white);
             color: var(--black);
             line-height: 1.6;
+        }
+
+        a, button, div, img {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
         }
 
         /* الشعار */
@@ -281,14 +294,39 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: -1px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             line-height: 1.1;
         }
 
         .product-price-large {
             font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* زر نسخ الرابط */
+        .copy-link-btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--black);
+            border: var(--border);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .copy-link-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .copy-link-btn:active {
+            transform: scale(0.95);
         }
 
         .size-section {
@@ -362,24 +400,53 @@
             text-align: center;
         }
 
+        /* أزرار الإجراء */
+        .action-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .add-to-cart-btn,
+        .order-now-btn {
+            flex: 1;
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border: var(--border);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
         .add-to-cart-btn {
             background: var(--black);
             color: var(--white);
-            border: var(--border);
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-            text-transform: uppercase;
-            font-family: inherit;
-            letter-spacing: 1px;
         }
 
         .add-to-cart-btn:hover {
             background: var(--white);
             color: var(--black);
+        }
+
+        .add-to-cart-btn:active {
+            transform: scale(0.95);
+        }
+
+        .order-now-btn {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .order-now-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .order-now-btn:active {
+            transform: scale(0.95);
         }
 
         .success-message {
@@ -391,6 +458,36 @@
             margin-top: 1rem;
             font-weight: bold;
             border: var(--border);
+        }
+
+        /* إشعار */
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--black);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border: var(--border);
+            z-index: 9999;
+            font-weight: bold;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideInRight 0.3s ease;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         @media (max-width: 768px) {
@@ -405,7 +502,8 @@
             .product-price-large { font-size: 2rem; }
             .size-btn { width: 40px; height: 40px; font-size: 0.8rem; }
             .qty-btn { width: 40px; height: 40px; }
-            .add-to-cart-btn { padding: 0.8rem; font-size: 0.9rem; }
+            .action-buttons { flex-direction: column; gap: 0.5rem; }
+            .add-to-cart-btn, .order-now-btn { padding: 0.8rem; font-size: 0.9rem; }
         }
 
         @media (max-width: 480px) {
@@ -431,7 +529,7 @@
         <div class="header-inner">
             <a href="index.html" class="logo">
                 <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
-                <span class="logo-text"><span></span></span>
+                <span class="logo-text">CAPO<span>BRAND</span></span>
             </a>
             <nav class="nav">
                 <a href="index.html">Home</a>
@@ -464,6 +562,8 @@
     </div>
 
     <script>
+        const WHATSAPP_NUMBER = "218920469011";
+        
         const products = JSON.parse(localStorage.getItem('capo_products')) || [
             { id: 1, name: "CAPO 1", price: 150, image: "te1.jpeg" },
             { id: 2, name: "CAPO 2", price: 175, image: "te2.jpeg" },
@@ -509,6 +609,11 @@
                     <h1 class="product-title">${product.name}</h1>
                     <div class="product-price-large">${product.price} LYD</div>
                     
+                    <!-- 📋 زر نسخ الرابط -->
+                    <button class="copy-link-btn" onclick="copyProductLink()">
+                        📋 نسخ رابط المنتج
+                    </button>
+                    
                     <div class="size-section">
                         <div class="size-title">Select Size:</div>
                         <div class="size-options">
@@ -530,9 +635,15 @@
                         </div>
                     </div>
                     
-                    <button class="add-to-cart-btn" onclick="addToCart()">
-                        Add to Cart — ${product.price * selectedQty} LYD
-                    </button>
+                    <!-- 🛒 زرين: أضف للسلة / اطلب مباشرة -->
+                    <div class="action-buttons">
+                        <button class="add-to-cart-btn" onclick="addToCart()">
+                            🛒 أضف للسلة
+                        </button>
+                        <button class="order-now-btn" onclick="orderNow()">
+                            ⚡ اطلب مباشرة
+                        </button>
+                    </div>
                 </div>
             `;
         }
@@ -551,11 +662,29 @@
             if (selectedQty + delta >= 1 && selectedQty + delta <= 10) {
                 selectedQty += delta;
                 document.querySelector('.qty-display').textContent = selectedQty;
-                document.querySelector('.add-to-cart-btn').textContent = 
-                    `Add to Cart — ${product.price * selectedQty} LYD`;
             }
         }
 
+        // 📋 نسخ رابط المنتج
+        function copyProductLink() {
+            const url = window.location.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showNotification('✓ تم نسخ رابط المنتج!');
+                });
+            } else {
+                // طريقة بديلة
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                textArea.remove();
+                showNotification('✓ تم نسخ رابط المنتج!');
+            }
+        }
+
+        // 🛒 إضافة للسلة
         function addToCart() {
             let cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
             const existing = cart.find(item => item.id === product.id && item.size === selectedSize);
@@ -575,11 +704,34 @@
             
             localStorage.setItem('capo_cart', JSON.stringify(cart));
             updateCartBadge();
+            showNotification('✓ تمت الإضافة للسلة!');
+        }
+
+        // ⚡ طلب مباشر
+        function orderNow() {
+            const total = product.price * selectedQty;
+            const message = `🛍️ *طلب مباشر - CAPO BRAND*\n\n` +
+                          `📦 *المنتج:* ${product.name}\n` +
+                          `📏 *المقاس:* ${selectedSize}\n` +
+                          `🔢 *الكمية:* ${selectedQty}\n` +
+                          `💰 *السعر:* ${total} LYD`;
             
-            const successMsg = document.getElementById('successMessage');
-            successMsg.style.display = 'block';
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // إشعار
+        function showNotification(message) {
+            const existing = document.querySelector('.cart-notification');
+            if (existing) existing.remove();
+            
+            const notif = document.createElement('div');
+            notif.className = 'cart-notification';
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            
             setTimeout(() => {
-                successMsg.style.display = 'none';
+                notif.remove();
             }, 2000);
         }
 
