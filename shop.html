@@ -79,7 +79,7 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* الشعار في الهيدر */
+        /* الشعار */
         .logo {
             display: flex;
             align-items: center;
@@ -300,6 +300,44 @@
             text-transform: uppercase;
         }
 
+        /* ⭐ نظام التقييم التفاعلي */
+        .rating-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 0.2rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+            direction: ltr;
+            justify-content: flex-start;
+        }
+
+        .rating-stars .star {
+            color: #ccc;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1.3rem;
+        }
+
+        .rating-stars .star.active {
+            color: #000;
+        }
+
+        .rating-stars .star:hover {
+            transform: scale(1.2);
+        }
+
+        .rating-info {
+            font-size: 0.75rem;
+            font-family: 'Arial', sans-serif;
+            font-weight: normal;
+            opacity: 0.7;
+        }
+
         .product-price {
             font-size: 1.3rem;
             font-weight: 900;
@@ -363,6 +401,10 @@
             .preloader-logo-img {
                 width: 80px;
             }
+            
+            .rating-stars .star {
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -387,24 +429,27 @@
                 padding: 0.6rem;
                 font-size: 0.75rem;
             }
+            
+            .rating-stars .star {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Preloader مع شعار lo2.png -->
+    <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-content">
-            <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <img src="lo2.png" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
             <div class="preloader-logo-text" style="display: none;">CAPO</div>
         </div>
     </div>
 
     <header class="header">
         <div class="header-inner">
-            <!-- الشعار في الهيدر lo.jpg -->
             <a href="index.html" class="logo">
                 <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
-                <span class="logo-text"><span></span></span>
+                <span class="logo-text">CAPO<span>BRAND</span></span>
             </a>
             
             <nav class="nav">
@@ -448,6 +493,40 @@
 
         localStorage.setItem('capo_products', JSON.stringify(products));
 
+        // استرجاع التقييمات المحفوظة
+        function getRatings() {
+            return JSON.parse(localStorage.getItem('capo_ratings')) || {};
+        }
+
+        // حفظ التقييم
+        function saveRating(productId, rating) {
+            const ratings = getRatings();
+            if (!ratings[productId]) {
+                ratings[productId] = { total: 0, count: 0 };
+            }
+            ratings[productId].total += rating;
+            ratings[productId].count += 1;
+            localStorage.setItem('capo_ratings', JSON.stringify(ratings));
+        }
+
+        // حساب المتوسط
+        function getAverageRating(productId) {
+            const ratings = getRatings();
+            if (ratings[productId] && ratings[productId].count > 0) {
+                return (ratings[productId].total / ratings[productId].count).toFixed(1);
+            }
+            return '0.0';
+        }
+
+        // عدد المقيمين
+        function getReviewCount(productId) {
+            const ratings = getRatings();
+            if (ratings[productId]) {
+                return ratings[productId].count;
+            }
+            return 0;
+        }
+
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
             const count = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -458,7 +537,11 @@
         function displayProducts() {
             const container = document.getElementById('shopProducts');
             
-            container.innerHTML = products.map((product, index) => `
+            container.innerHTML = products.map((product, index) => {
+                const avgRating = getAverageRating(product.id);
+                const reviewCount = getReviewCount(product.id);
+                
+                return `
                 <div class="product-card">
                     <div class="product-image">
                         <img src="${product.image}" alt="${product.name}" 
@@ -468,14 +551,89 @@
                     </div>
                     <div class="product-info">
                         <div class="product-name">${product.name}</div>
+                        
+                        <!-- ⭐ تقييم تفاعلي -->
+                        <div class="rating-container">
+                            <div class="rating-stars" onclick="rateProduct(${product.id}, event)">
+                                ${generateStarButtons(product.id, avgRating)}
+                            </div>
+                            <div class="rating-info" id="ratingInfo-${product.id}">
+                                ${avgRating} (${reviewCount} تقييم)
+                            </div>
+                        </div>
+                        
                         <div class="product-price">${product.price} LYD</div>
                         <a href="product.html?id=${product.id}" class="view-product-btn">
                             View Product
                         </a>
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
+
+        // توليد أزرار النجوم
+        function generateStarButtons(productId, avgRating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                const active = i <= Math.round(avgRating) ? 'active' : '';
+                stars += `<span class="star ${active}" data-star="${i}" onclick="event.stopPropagation(); rateProduct(${productId}, ${i})">★</span>`;
+            }
+            return stars;
+        }
+
+        // تقييم المنتج
+        function rateProduct(productId, rating) {
+            // حفظ التقييم
+            saveRating(productId, rating);
+            
+            // تحديث العرض
+            const avgRating = getAverageRating(productId);
+            const reviewCount = getReviewCount(productId);
+            
+            // تحديث النجوم
+            const stars = document.querySelectorAll(`#ratingInfo-${productId}`).length ? 
+                         document.querySelectorAll(`[onclick*="rateProduct(${productId}"]`) : [];
+            
+            // إعادة عرض المنتجات
+            displayProducts();
+            
+            // إشعار
+            showRatingNotification(rating);
+        }
+
+        // إشعار التقييم
+        function showRatingNotification(rating) {
+            const notif = document.createElement('div');
+            notif.textContent = `⭐ شكراً لتقييمك! (${rating} نجوم)`;
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #000;
+                color: #fff;
+                padding: 1rem 1.5rem;
+                border: 2px solid #000;
+                z-index: 9999;
+                font-weight: bold;
+                font-family: inherit;
+                animation: slideIn 0.3s ease;
+                box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            `;
+            document.body.appendChild(notif);
+            
+            setTimeout(() => notif.remove(), 2000);
+        }
+
+        // إضافة أنيميشن
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
 
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mobileMenu').classList.toggle('active');
