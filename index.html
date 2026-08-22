@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         body {
@@ -28,58 +32,58 @@
         }
 
         /* Preloader */
-       /* Preloader */
-.preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: preloaderOut 0.5s ease 1s forwards;
-}
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: preloaderOut 0.5s ease 1s forwards;
+        }
 
-@keyframes preloaderOut {
-    to {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
+        @keyframes preloaderOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
 
-.preloader-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-.preloader-logo-img {
-    width: 120px;
-    height: auto;
-    animation: float 2s ease-in-out infinite;
-}
+        .preloader-logo-img {
+            width: 120px;
+            height: auto;
+            animation: float 2s ease-in-out infinite;
+        }
 
-.preloader-logo-text {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #fff;
-    animation: float 2s ease-in-out infinite;
-    letter-spacing: -2px;
-}
+        .preloader-logo-text {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            animation: float 2s ease-in-out infinite;
+            letter-spacing: -2px;
+        }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
         /* Header */
         .header {
             background: var(--white);
             border-bottom: var(--border);
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -94,32 +98,17 @@
             align-items: center;
         }
 
-        /* ✅ الشعار الجديد - صورة + نص */
+        /* الشعار - صورة فقط */
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
             text-decoration: none;
         }
 
         .logo-img {
-            height: 45px;
+            height: 50px;
             width: auto;
             display: block;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--black);
-            letter-spacing: -2px;
-            text-transform: uppercase;
-        }
-
-        .logo-text span {
-            background: var(--black);
-            color: var(--white);
-            padding: 0 0.3rem;
         }
 
         .nav {
@@ -349,6 +338,53 @@
             padding: 0 0.5rem;
         }
 
+        /* ✅ عداد الزوار الوهمي */
+        .fake-visitors {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--black);
+            color: var(--white);
+            padding: 0.8rem 1.2rem;
+            border: var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 99;
+            font-size: 0.85rem;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            animation: slideInRight 0.5s ease 1.5s both;
+        }
+
+        .visitor-dot {
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .visitor-count {
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         /* Footer */
         .footer {
             background: var(--black);
@@ -400,7 +436,7 @@
             }
             
             .hero-title {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
             
             .hero-image-container {
@@ -417,31 +453,33 @@
             }
             
             .logo-img {
-                height: 35px;
+                height: 40px;
             }
             
-            .logo-text {
-                font-size: 1.3rem;
+            .fake-visitors {
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.75rem;
+                padding: 0.6rem 1rem;
             }
         }
     </style>
 </head>
 <body>
-   <!-- Preloader -->
-<div class="preloader">
-    <div class="preloader-content">
-        <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-        <div class="preloader-logo-text" style="display: none;">CAPO</div>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <img src="lo2.png" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <div class="preloader-logo-text" style="display: none;">CAPO</div>
+        </div>
     </div>
-</div>
 
     <!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <!-- ✅ الشعار الجديد - صورة + نص -->
+            <!-- ✅ الشعار - صورة فقط بدون نص -->
             <a href="index.html" class="logo">
                 <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
-                <span class="logo-text">CAPO<span>BRAND</span></span>
             </a>
             
             <nav class="nav">
@@ -472,10 +510,10 @@
         <div class="hero-inner">
             <div>
                 <h1 class="hero-title">
-                    CAPO
-                    <span>BRAND</span>
+                    STREET
+                    <span>WEAR</span>
                 </h1>
-                <p class="hero-subtitle">Minimalist Brutalist Streetwear</p>
+                <p class="hero-subtitle">Minimalist Brutalist Collection</p>
                 <p class="hero-description">
                     تيشيرتات بتصميم جريء وهوية فريدة. نصنع قطعاً تعبر عنك بكل بساطة وقوة. 
                     أسود وأبيض فقط، لا شيء غير ذلك.
@@ -502,6 +540,12 @@
         </div>
     </section>
 
+    <!-- ✅ عداد الزوار الوهمي -->
+    <div class="fake-visitors">
+        <div class="visitor-dot"></div>
+        <span><span class="visitor-count" id="visitorCount">1,234</span> زائر يتصفح الآن</span>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -524,6 +568,21 @@
             document.getElementById('mobileCartBadge').textContent = count;
         }
 
+        // ✅ عداد الزوار الوهمي
+        function fakeVisitorsCounter() {
+            const countElement = document.getElementById('visitorCount');
+            if (!countElement) return;
+            
+            let visitors = 1200 + Math.floor(Math.random() * 100);
+            countElement.textContent = visitors.toLocaleString();
+            
+            setInterval(() => {
+                const change = Math.floor(Math.random() * 20) - 10;
+                visitors = Math.max(1100, Math.min(1500, visitors + change));
+                countElement.textContent = visitors.toLocaleString();
+            }, 3000);
+        }
+
         // Mobile Menu Toggle
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mobileMenu').classList.toggle('active');
@@ -538,6 +597,7 @@
 
         // Initialize
         updateCartBadge();
+        fakeVisitorsCounter();
     </script>
 </body>
 </html>
