@@ -220,19 +220,11 @@
             width: 100%;
         }
 
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            line-height: 0.9;
-            text-transform: uppercase;
-            letter-spacing: -3px;
+        .hero-logo-image {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 1.5rem;
-        }
-
-        .hero-title span {
             display: block;
-            -webkit-text-stroke: 2px var(--black);
-            color: transparent;
         }
 
         .hero-subtitle {
@@ -338,53 +330,6 @@
             padding: 0 0.5rem;
         }
 
-        /* ✅ عداد الزوار الوهمي */
-        .fake-visitors {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--black);
-            color: var(--white);
-            padding: 0.8rem 1.2rem;
-            border: var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            z-index: 99;
-            font-size: 0.85rem;
-            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
-            animation: slideInRight 0.5s ease 1.5s both;
-        }
-
-        .visitor-dot {
-            width: 10px;
-            height: 10px;
-            background: #4CAF50;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        .visitor-count {
-            font-weight: 900;
-            font-size: 1rem;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
         /* Footer */
         .footer {
             background: var(--black);
@@ -435,8 +380,8 @@
                 gap: 2rem;
             }
             
-            .hero-title {
-                font-size: 2.5rem;
+            .hero-logo-image {
+                max-width: 200px;
             }
             
             .hero-image-container {
@@ -455,13 +400,6 @@
             .logo-img {
                 height: 40px;
             }
-            
-            .fake-visitors {
-                bottom: 10px;
-                right: 10px;
-                font-size: 0.75rem;
-                padding: 0.6rem 1rem;
-            }
         }
     </style>
 </head>
@@ -469,7 +407,7 @@
     <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-content">
-            <img src="lo2.png" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
             <div class="preloader-logo-text" style="display: none;">CAPO</div>
         </div>
     </div>
@@ -477,7 +415,6 @@
     <!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <!-- ✅ الشعار - صورة فقط بدون نص -->
             <a href="index.html" class="logo">
                 <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
             </a>
@@ -509,10 +446,9 @@
     <section class="hero">
         <div class="hero-inner">
             <div>
-                <h1 class="hero-title">
-                    STREET
-                    <span>WEAR</span>
-                </h1>
+                <img src="llo.jpg" alt="CAPO BRAND" class="hero-logo-image" 
+                     onerror="this.style.display='none'">
+                
                 <p class="hero-subtitle">Minimalist Brutalist Collection</p>
                 <p class="hero-description">
                     تيشيرتات بتصميم جريء وهوية فريدة. نصنع قطعاً تعبر عنك بكل بساطة وقوة. 
@@ -521,7 +457,6 @@
                 <a href="shop.html" class="btn-primary">تسوق الآن ←</a>
             </div>
             <div class="hero-image-container">
-                <!-- ضع صورتك هنا -->
                 <img src="c1.jpeg" alt="CAPO BRAND" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                 <div class="hero-image-placeholder" style="display: none;">
                     👕
@@ -539,12 +474,6 @@
             </p>
         </div>
     </section>
-
-    <!-- ✅ عداد الزوار الوهمي -->
-    <div class="fake-visitors">
-        <div class="visitor-dot"></div>
-        <span><span class="visitor-count" id="visitorCount">1,234</span> زائر يتصفح الآن</span>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -568,21 +497,6 @@
             document.getElementById('mobileCartBadge').textContent = count;
         }
 
-        // ✅ عداد الزوار الوهمي
-        function fakeVisitorsCounter() {
-            const countElement = document.getElementById('visitorCount');
-            if (!countElement) return;
-            
-            let visitors = 1200 + Math.floor(Math.random() * 100);
-            countElement.textContent = visitors.toLocaleString();
-            
-            setInterval(() => {
-                const change = Math.floor(Math.random() * 20) - 10;
-                visitors = Math.max(1100, Math.min(1500, visitors + change));
-                countElement.textContent = visitors.toLocaleString();
-            }, 3000);
-        }
-
         // Mobile Menu Toggle
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mobileMenu').classList.toggle('active');
@@ -597,7 +511,6 @@
 
         // Initialize
         updateCartBadge();
-        fakeVisitorsCounter();
     </script>
 </body>
 </html>
