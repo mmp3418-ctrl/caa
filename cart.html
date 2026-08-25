@@ -13,7 +13,15 @@
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
         body {
             font-family: 'Arial Black', 'Impact', sans-serif;
@@ -21,89 +29,84 @@
             color: var(--black);
             line-height: 1.6;
         }
-/* الشعار */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
 
-.logo-img {
-    height: 45px;
-    width: auto;
-    display: block;
-}
+        a, button, div, img {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
 
-.logo-text {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #000;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
+        /* الشعار */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
 
-.logo-text span {
-    background: #000;
-    color: #fff;
-    padding: 0 5px;
-}
+        .logo-img {
+            height: 45px;
+            width: auto;
+            display: block;
+        }
 
-@media (max-width: 768px) {
-    .logo-img {
-        height: 35px;
-    }
-    .logo-text {
-        font-size: 1.2rem;
-    }
-}
-       /* Preloader */
-.preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: preloaderOut 0.5s ease 1s forwards;
-}
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
 
-@keyframes preloaderOut {
-    to {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
+        .logo-text span {
+            background: #000;
+            color: #fff;
+            padding: 0 5px;
+        }
 
-.preloader-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: preloaderOut 0.5s ease 1s forwards;
+        }
 
-.preloader-logo-img {
-    width: 120px;
-    height: auto;
-    animation: float 2s ease-in-out infinite;
-}
+        @keyframes preloaderOut {
+            to { opacity: 0; visibility: hidden; }
+        }
 
-.preloader-logo-text {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #fff;
-    animation: float 2s ease-in-out infinite;
-    letter-spacing: -2px;
-}
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
+        .preloader-logo-img {
+            width: 120px;
+            height: auto;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .preloader-logo-text {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            animation: float 2s ease-in-out infinite;
+            letter-spacing: -2px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
 
         .header {
             background: var(--white);
@@ -121,20 +124,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            text-decoration: none;
-            color: var(--black);
-            letter-spacing: -2px;
-        }
-
-        .logo span {
-            background: var(--black);
-            color: var(--white);
-            padding: 0 0.3rem;
         }
 
         .nav {
@@ -223,12 +212,6 @@
             text-transform: uppercase;
             border-bottom: 1px solid #ddd;
             font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .mobile-menu a:hover {
-            background: var(--black);
-            color: var(--white);
         }
 
         .container {
@@ -247,6 +230,34 @@
             padding-bottom: 1rem;
         }
 
+        /* شريط التقدم */
+        .cart-progress {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem;
+            border: var(--border);
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: var(--white);
+        }
+
+        .progress-step.active {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .progress-step.completed {
+            background: var(--gray);
+            border-color: #999;
+        }
+
         .cart-item {
             border: var(--border);
             padding: 1rem;
@@ -256,6 +267,7 @@
             align-items: center;
             gap: 1rem;
             transition: var(--transition);
+            position: relative;
         }
 
         .cart-item:hover {
@@ -282,15 +294,15 @@
         .cart-item-actions {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.6rem;
         }
 
         .qty-btn {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border: var(--border);
             background: var(--white);
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: var(--transition);
             font-weight: bold;
@@ -302,21 +314,29 @@
             color: var(--white);
         }
 
+        /* 🗑️ أيقونة حذف */
         .remove-btn {
-            background: var(--black);
-            color: var(--white);
+            background: var(--white);
             border: var(--border);
-            padding: 0.5rem 0.8rem;
+            width: 35px;
+            height: 35px;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 1rem;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: inherit;
-            font-size: 0.8rem;
         }
 
         .remove-btn:hover {
-            background: var(--white);
-            color: var(--black);
+            background: #ff0000;
+            border-color: #ff0000;
+            transform: scale(1.1);
+        }
+
+        .remove-btn:active {
+            transform: scale(0.9);
         }
 
         .cart-total {
@@ -334,8 +354,13 @@
             margin-bottom: 1rem;
         }
 
+        .checkout-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+
         .checkout-btn {
-            display: block;
+            flex: 1;
             background: var(--black);
             color: var(--white);
             text-decoration: none;
@@ -344,13 +369,37 @@
             font-weight: bold;
             text-transform: uppercase;
             transition: var(--transition);
-            font-size: 1rem;
+            font-size: 0.9rem;
             border: var(--border);
         }
 
         .checkout-btn:hover {
             background: var(--white);
             color: var(--black);
+        }
+
+        /* زر متابعة التسوق */
+        .continue-shopping-btn {
+            flex: 1;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            border: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .continue-shopping-btn:hover {
+            background: var(--black);
+            color: var(--white);
         }
 
         .empty-cart {
@@ -380,42 +429,99 @@
             color: var(--black);
         }
 
+        /* منتجات مقترحة */
+        .suggested-section {
+            margin-top: 3rem;
+            border-top: var(--border);
+            padding-top: 2rem;
+        }
+
+        .suggested-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .suggested-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .suggested-card {
+            border: var(--border);
+            text-decoration: none;
+            color: var(--black);
+            transition: var(--transition);
+            display: block;
+        }
+
+        .suggested-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        .suggested-image {
+            height: 150px;
+            border-bottom: var(--border);
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .suggested-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .suggested-info {
+            padding: 0.7rem;
+        }
+
+        .suggested-name {
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .suggested-price {
+            font-size: 0.9rem;
+            font-weight: 900;
+        }
+
         @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .cart-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .cart-item-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
+            .nav { display: none; }
+            .menu-toggle { display: block; }
+            .logo-img { height: 35px; }
+            .logo-text { font-size: 1.2rem; }
+            .cart-item { flex-direction: column; align-items: flex-start; }
+            .cart-item-actions { width: 100%; justify-content: space-between; }
+            .checkout-buttons { flex-direction: column; }
+            .suggested-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
-   <!-- Preloader -->
-<div class="preloader">
-    <div class="preloader-content">
-        <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-        <div class="preloader-logo-text" style="display: none;">CAPO</div>
+    <div class="preloader">
+        <div class="preloader-content">
+            <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <div class="preloader-logo-text" style="display: none;">CAPO</div>
+        </div>
     </div>
-</div>
 
     <header class="header">
         <div class="header-inner">
-        <a href="index.html" class="logo">
-    <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
-    <span class="logo-text"><span></span></span>
-</a>
+            <a href="index.html" class="logo">
+                <img src="lo.jpg" alt="CAPO Logo" class="logo-img" onerror="this.style.display='none'">
+                <span class="logo-text"><span></span></span>
+            </a>
             <nav class="nav">
                 <a href="index.html">Home</a>
                 <a href="shop.html">Shop</a>
@@ -444,6 +550,8 @@
     </div>
 
     <script>
+        const products = JSON.parse(localStorage.getItem('capo_products')) || [];
+
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem('capo_cart')) || [];
             const count = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -475,28 +583,71 @@
                 return `
                     <div class="cart-item">
                         <div class="cart-item-info">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div style="opacity: 0.6; font-size: 0.9rem;">Size: ${item.size}</div>
+                            <div class="cart-item-name">👕 ${item.name}</div>
+                            <div style="opacity: 0.6; font-size: 0.9rem; font-family: Arial;">المقاس: ${item.size}</div>
                             <div class="cart-item-price">${itemTotal} LYD</div>
                         </div>
                         <div class="cart-item-actions">
                             <button class="qty-btn" onclick="updateQty(${index}, -1)">−</button>
                             <span style="font-weight: bold; font-size: 1.1rem;">${item.qty}</span>
                             <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
-                            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                            <button class="remove-btn" onclick="removeItem(${index})" title="حذف">🗑️</button>
                         </div>
                     </div>
                 `;
             }).join('');
             
             container.innerHTML = `
+                <div class="cart-progress">
+                    <div class="progress-step active">🛒 السلة</div>
+                    <div class="progress-step">📦 البيانات</div>
+                    <div class="progress-step">✅ التأكيد</div>
+                </div>
+                
                 ${itemsHTML}
+                
                 <div class="cart-total">
                     <div class="cart-total-row">
-                        <span>Total:</span>
+                        <span>💰 المجموع:</span>
                         <span>${total} LYD</span>
                     </div>
-                    <a href="checkout.html" class="checkout-btn">Proceed to Checkout →</a>
+                    <div class="checkout-buttons">
+                        <a href="shop.html" class="continue-shopping-btn">
+                            ← متابعة التسوق
+                        </a>
+                        <a href="checkout.html" class="checkout-btn">
+                            إتمام الطلب →
+                        </a>
+                    </div>
+                </div>
+                
+                ${displaySuggested(cart)}
+            `;
+        }
+
+        function displaySuggested(cart) {
+            const cartIds = cart.map(item => item.id);
+            const suggested = products.filter(p => !cartIds.includes(p.id)).slice(0, 4);
+            
+            if (suggested.length === 0) return '';
+            
+            return `
+                <div class="suggested-section">
+                    <h2 class="suggested-title">✨ منتجات قد تعجبك</h2>
+                    <div class="suggested-grid">
+                        ${suggested.map(product => `
+                            <a href="product.html?id=${product.id}" class="suggested-card">
+                                <div class="suggested-image">
+                                    <img src="${product.image}" alt="${product.name}" 
+                                         onerror="this.style.display='none'; this.parentElement.textContent='👕'">
+                                </div>
+                                <div class="suggested-info">
+                                    <div class="suggested-name">${product.name}</div>
+                                    <div class="suggested-price">${product.price} LYD</div>
+                                </div>
+                            </a>
+                        `).join('')}
+                    </div>
                 </div>
             `;
         }
@@ -520,7 +671,36 @@
             localStorage.setItem('capo_cart', JSON.stringify(cart));
             updateCartBadge();
             displayCart();
+            
+            // إشعار
+            const notif = document.createElement('div');
+            notif.textContent = '🗑️ تم حذف المنتج';
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #000;
+                color: #fff;
+                padding: 1rem 1.5rem;
+                border: 2px solid #000;
+                z-index: 9999;
+                font-weight: bold;
+                font-family: inherit;
+                animation: slideIn 0.3s ease;
+                box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            `;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 2000);
         }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
 
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mobileMenu').classList.toggle('active');
