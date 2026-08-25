@@ -79,7 +79,6 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* الشعار */
         .logo {
             display: flex;
             align-items: center;
@@ -222,6 +221,8 @@
             display: flex;
             flex-direction: column;
             -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
         }
 
         .product-card:hover {
@@ -248,6 +249,24 @@
             left: 0;
             transition: transform 0.4s ease;
             pointer-events: auto;
+        }
+
+        /* ✨ تأثير اللمعان */
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .product-card:hover .product-image::after {
+            left: 100%;
         }
 
         .product-image:active img {
@@ -282,8 +301,37 @@
             justify-content: center;
             font-weight: bold;
             font-size: 0.9rem;
-            z-index: 2;
+            z-index: 5;
             pointer-events: none;
+        }
+
+        /* 🤍 زر المفضلة */
+        .wishlist-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--white);
+            border: var(--border);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            z-index: 5;
+            border-radius: 50%;
+        }
+
+        .wishlist-btn:hover {
+            transform: scale(1.2);
+            background: var(--black);
+        }
+
+        .wishlist-btn.active {
+            background: #ff0000;
+            border-color: #ff0000;
         }
 
         .product-info {
@@ -300,7 +348,6 @@
             text-transform: uppercase;
         }
 
-        /* ⭐ نظام التقييم التفاعلي */
         .rating-container {
             display: flex;
             flex-direction: column;
@@ -343,8 +390,15 @@
             font-weight: 900;
         }
 
+        /* أزرار سريعة */
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
         .view-product-btn {
-            display: block;
+            flex: 1;
             background: var(--black);
             color: var(--white);
             border: var(--border);
@@ -355,8 +409,7 @@
             cursor: pointer;
             transition: var(--transition);
             font-family: inherit;
-            font-size: 0.9rem;
-            margin-top: auto;
+            font-size: 0.8rem;
             -webkit-tap-highlight-color: transparent;
             text-decoration: none;
         }
@@ -366,81 +419,152 @@
             color: var(--black);
         }
 
-        .view-product-btn:active {
+        /* 👁️ زر عرض سريع */
+        .quick-view-btn {
+            background: var(--white);
+            color: var(--black);
+            border: var(--border);
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            font-size: 0.8rem;
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .quick-view-btn:hover {
             background: var(--black);
             color: var(--white);
-            transform: scale(0.95);
+        }
+
+        /* نافذة العرض السريع */
+        .quick-view-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-view-modal.active {
+            display: flex;
+        }
+
+        .quick-view-content {
+            background: var(--white);
+            border: var(--border);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .quick-view-close {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .quick-view-image {
+            height: 300px;
+            border-bottom: var(--border);
+            overflow: hidden;
+        }
+
+        .quick-view-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quick-view-info {
+            padding: 1.5rem;
+        }
+
+        .quick-view-name {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-view-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .quick-view-btn-full {
+            display: block;
+            background: var(--black);
+            color: var(--white);
+            border: var(--border);
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .quick-view-btn-full:hover {
+            background: var(--white);
+            color: var(--black);
         }
 
         @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-            
-            .product-image {
-                height: 250px;
-            }
-            
-            .logo-img {
-                height: 35px;
-            }
-            
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            
-            .preloader-logo-img {
-                width: 80px;
-            }
-            
-            .rating-stars .star {
-                font-size: 1rem;
-            }
+            .nav { display: none; }
+            .menu-toggle { display: block; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .product-image { height: 250px; }
+            .logo-img { height: 35px; }
+            .logo-text { font-size: 1.2rem; }
+            .preloader-logo-img { width: 80px; }
+            .rating-stars .star { font-size: 1rem; }
+            .quick-actions { flex-direction: column; }
         }
 
         @media (max-width: 480px) {
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
-            }
-            
-            .product-image {
-                height: 180px;
-            }
-            
-            .product-name {
-                font-size: 0.8rem;
-            }
-            
-            .product-price {
-                font-size: 1rem;
-            }
-            
-            .view-product-btn {
-                padding: 0.6rem;
-                font-size: 0.75rem;
-            }
-            
-            .rating-stars .star {
-                font-size: 0.9rem;
-            }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .product-image { height: 180px; }
+            .product-name { font-size: 0.8rem; }
+            .product-price { font-size: 1rem; }
+            .rating-stars .star { font-size: 0.9rem; }
+            .wishlist-btn { width: 28px; height: 28px; font-size: 0.9rem; top: 0.5rem; left: 0.5rem; }
+            .product-number { width: 28px; height: 28px; font-size: 0.7rem; top: 0.5rem; right: 0.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-content">
-            <img src="lo2.PNG" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <img src="lo2.png" alt="CAPO" class="preloader-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
             <div class="preloader-logo-text" style="display: none;">CAPO</div>
         </div>
     </div>
@@ -481,6 +605,19 @@
         <div class="products-grid" id="shopProducts"></div>
     </div>
 
+    <!-- نافذة العرض السريع -->
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="quick-view-content">
+            <button class="quick-view-close" onclick="closeQuickView()">✕</button>
+            <div class="quick-view-image" id="quickViewImage"></div>
+            <div class="quick-view-info">
+                <div class="quick-view-name" id="quickViewName"></div>
+                <div class="quick-view-price" id="quickViewPrice"></div>
+                <a href="#" class="quick-view-btn-full" id="quickViewFullBtn">عرض التفاصيل الكاملة</a>
+            </div>
+        </div>
+    </div>
+
     <script>
         const products = [
             { id: 1, name: "CAPO 1", price: 150, image: "te1.jpeg" },
@@ -493,12 +630,10 @@
 
         localStorage.setItem('capo_products', JSON.stringify(products));
 
-        // استرجاع التقييمات المحفوظة
         function getRatings() {
             return JSON.parse(localStorage.getItem('capo_ratings')) || {};
         }
 
-        // حفظ التقييم
         function saveRating(productId, rating) {
             const ratings = getRatings();
             if (!ratings[productId]) {
@@ -509,7 +644,6 @@
             localStorage.setItem('capo_ratings', JSON.stringify(ratings));
         }
 
-        // حساب المتوسط
         function getAverageRating(productId) {
             const ratings = getRatings();
             if (ratings[productId] && ratings[productId].count > 0) {
@@ -518,13 +652,32 @@
             return '0.0';
         }
 
-        // عدد المقيمين
         function getReviewCount(productId) {
             const ratings = getRatings();
             if (ratings[productId]) {
                 return ratings[productId].count;
             }
             return 0;
+        }
+
+        function getWishlist() {
+            return JSON.parse(localStorage.getItem('capo_wishlist')) || [];
+        }
+
+        function toggleWishlist(productId, btn) {
+            let wishlist = getWishlist();
+            if (wishlist.includes(productId)) {
+                wishlist = wishlist.filter(id => id !== productId);
+                btn.classList.remove('active');
+                btn.textContent = '🤍';
+                showNotification('تمت الإزالة من المفضلة');
+            } else {
+                wishlist.push(productId);
+                btn.classList.add('active');
+                btn.textContent = '❤️';
+                showNotification('✓ تمت الإضافة للمفضلة');
+            }
+            localStorage.setItem('capo_wishlist', JSON.stringify(wishlist));
         }
 
         function updateCartBadge() {
@@ -536,10 +689,12 @@
 
         function displayProducts() {
             const container = document.getElementById('shopProducts');
+            const wishlist = getWishlist();
             
             container.innerHTML = products.map((product, index) => {
                 const avgRating = getAverageRating(product.id);
                 const reviewCount = getReviewCount(product.id);
+                const isWished = wishlist.includes(product.id);
                 
                 return `
                 <div class="product-card">
@@ -548,13 +703,16 @@
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                         <span class="product-placeholder" style="display: none;">👕</span>
                         <span class="product-number">${String(index + 1).padStart(2, '0')}</span>
+                        <button class="wishlist-btn ${isWished ? 'active' : ''}" 
+                                onclick="event.stopPropagation(); toggleWishlist(${product.id}, this)">
+                            ${isWished ? '❤️' : '🤍'}
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-name">${product.name}</div>
                         
-                        <!-- ⭐ تقييم تفاعلي -->
                         <div class="rating-container">
-                            <div class="rating-stars" onclick="rateProduct(${product.id}, event)">
+                            <div class="rating-stars">
                                 ${generateStarButtons(product.id, avgRating)}
                             </div>
                             <div class="rating-info" id="ratingInfo-${product.id}">
@@ -563,46 +721,36 @@
                         </div>
                         
                         <div class="product-price">${product.price} LYD</div>
-                        <a href="product.html?id=${product.id}" class="view-product-btn">
-                            View Product
-                        </a>
+                        
+                        <div class="quick-actions">
+                            <a href="product.html?id=${product.id}" class="view-product-btn">
+                                View
+                            </a>
+                            <button class="quick-view-btn" onclick="openQuickView(${product.id})">
+                                👁️ سريع
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
             }).join('');
         }
 
-        // توليد أزرار النجوم
         function generateStarButtons(productId, avgRating) {
             let stars = '';
             for (let i = 1; i <= 5; i++) {
                 const active = i <= Math.round(avgRating) ? 'active' : '';
-                stars += `<span class="star ${active}" data-star="${i}" onclick="event.stopPropagation(); rateProduct(${productId}, ${i})">★</span>`;
+                stars += `<span class="star ${active}" onclick="event.stopPropagation(); rateProduct(${productId}, ${i})">★</span>`;
             }
             return stars;
         }
 
-        // تقييم المنتج
         function rateProduct(productId, rating) {
-            // حفظ التقييم
             saveRating(productId, rating);
-            
-            // تحديث العرض
-            const avgRating = getAverageRating(productId);
-            const reviewCount = getReviewCount(productId);
-            
-            // تحديث النجوم
-            const stars = document.querySelectorAll(`#ratingInfo-${productId}`).length ? 
-                         document.querySelectorAll(`[onclick*="rateProduct(${productId}"]`) : [];
-            
-            // إعادة عرض المنتجات
             displayProducts();
-            
-            // إشعار
             showRatingNotification(rating);
         }
 
-        // إشعار التقييم
         function showRatingNotification(rating) {
             const notif = document.createElement('div');
             notif.textContent = `⭐ شكراً لتقييمك! (${rating} نجوم)`;
@@ -621,11 +769,55 @@
                 box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
             `;
             document.body.appendChild(notif);
-            
             setTimeout(() => notif.remove(), 2000);
         }
 
-        // إضافة أنيميشن
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.textContent = message;
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #000;
+                color: #fff;
+                padding: 1rem 1.5rem;
+                border: 2px solid #000;
+                z-index: 9999;
+                font-weight: bold;
+                font-family: inherit;
+                animation: slideIn 0.3s ease;
+                box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            `;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 2000);
+        }
+
+        function openQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            document.getElementById('quickViewImage').innerHTML = `
+                <img src="${product.image}" alt="${product.name}" 
+                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👕</text></svg>'">
+            `;
+            document.getElementById('quickViewName').textContent = product.name;
+            document.getElementById('quickViewPrice').textContent = product.price + ' LYD';
+            document.getElementById('quickViewFullBtn').href = 'product.html?id=' + product.id;
+            
+            document.getElementById('quickViewModal').classList.add('active');
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.remove('active');
+        }
+
+        document.getElementById('quickViewModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQuickView();
+            }
+        });
+
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slideIn {
